@@ -23,20 +23,38 @@ jobs:
       with:
         node-version: '18'
 
+    - name: Debug Environment
+      run: |
+        echo "Node version:"
+        node --version
+        echo "NPM version:"
+        npm --version
+        echo "Java version:"
+        java -version
+        echo "Android Home: $ANDROID_HOME"
+        ls -R android
+
     - name: Install Dependencies
-      run: npm install
+      run: npm ci
 
     - name: Sync Capacitor
       run: npx cap sync android
 
+    - name: Grant Execute Permission for Gradlew
+      run: chmod +x android/gradlew
+
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
-        gradle-version: 8.7
+        gradle-version: 8.11.1
+
+    - name: Verify Gradle
+      working-directory: android
+      run: gradle --version
 
     - name: Build with Gradle
       working-directory: android
-      run: gradle assembleDebug --stacktrace
+      run: gradle assembleDebug --stacktrace --info --no-daemon
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
