@@ -1,10 +1,14 @@
-name: Debug Minimal
+name: Debug CI
 
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
-  test-job:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Simple Echo
-        run: echo "GitHub Actions is alive"
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo Hello, world!
