@@ -29,10 +29,9 @@ jobs:
     - name: Sync Capacitor
       run: npx cap sync android
 
-    # 使用 Setup Gradle Action 来管理 Gradle 环境，而不是直接运行 gradlew
-    # 这样可以避免 Windows/Linux 换行符导致的脚本错误
+    # 修正：回退到 v3 版本，v4 可能不存在导致瞬间失败
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v4
+      uses: gradle/actions/setup-gradle@v3
       with:
         gradle-version: 8.11.1
 
