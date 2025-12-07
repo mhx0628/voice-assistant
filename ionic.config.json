@@ -1,0 +1,7 @@
+{
+  "name": "voice-assistant",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

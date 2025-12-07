@@ -1,0 +1,11 @@
+{
+  "appId": "io.voice.assistant",
+  "appName": "VoiceAssistant",
+  "webDir": "www",
+  "server": {
+    "allowNavigation": [
+      "*"
+    ],
+    "cleartext": true
+  }
+}
