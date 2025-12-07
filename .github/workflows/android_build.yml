@@ -29,15 +29,12 @@ jobs:
     - name: Sync Capacitor
       run: npx cap sync android
 
-    # 手动修复 gradlew 换行符并赋予权限，不依赖外部 Action
-    - name: Fix Gradlew
-      run: |
-        sed -i 's/\r$//' android/gradlew
-        chmod +x android/gradlew
-
-    - name: Build APK
-      working-directory: android
-      run: ./gradlew assembleDebug --stacktrace --info
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@v2
+      with:
+        gradle-version: 8.11.1
+        arguments: assembleDebug --stacktrace --info
+        build-root-directory: android
 
     - name: Upload APK
       uses: actions/upload-artifact@v3
